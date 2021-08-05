@@ -11,6 +11,7 @@ import store from './redux/store';
 
 function App() {
   const setedContacts = store.getState().contacts.items;
+  
   return (
     <Container>
       <Toaster />

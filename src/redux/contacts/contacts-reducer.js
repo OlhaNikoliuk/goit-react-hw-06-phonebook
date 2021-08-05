@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import types from './contacts-types';
 import toast from 'react-hot-toast';
 
-const initialState = JSON.parse(window.localStorage.getItem('contacts')) ?? '';
+const initialState = JSON.parse(window.localStorage.getItem('contacts')) ?? [];
 
 const findContact = (allContacts, newContact) => {
 
