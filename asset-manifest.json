@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/OlhaNikoliuk/goit-react-hw-06-phonebook/static/css/main.e492ffe7.chunk.css",
+    "main.js": "/OlhaNikoliuk/goit-react-hw-06-phonebook/static/js/main.7ac6da23.chunk.js",
+    "main.js.map": "/OlhaNikoliuk/goit-react-hw-06-phonebook/static/js/main.7ac6da23.chunk.js.map",
+    "runtime-main.js": "/OlhaNikoliuk/goit-react-hw-06-phonebook/static/js/runtime-main.68e15369.js",
+    "runtime-main.js.map": "/OlhaNikoliuk/goit-react-hw-06-phonebook/static/js/runtime-main.68e15369.js.map",
+    "static/js/2.72c28189.chunk.js": "/OlhaNikoliuk/goit-react-hw-06-phonebook/static/js/2.72c28189.chunk.js",
+    "static/js/2.72c28189.chunk.js.map": "/OlhaNikoliuk/goit-react-hw-06-phonebook/static/js/2.72c28189.chunk.js.map",
+    "index.html": "/OlhaNikoliuk/goit-react-hw-06-phonebook/index.html",
+    "static/css/main.e492ffe7.chunk.css.map": "/OlhaNikoliuk/goit-react-hw-06-phonebook/static/css/main.e492ffe7.chunk.css.map",
+    "static/js/2.72c28189.chunk.js.LICENSE.txt": "/OlhaNikoliuk/goit-react-hw-06-phonebook/static/js/2.72c28189.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/OlhaNikoliuk/goit-react-hw-06-phonebook/static/media/contact-bcg.89fae9ca.jpeg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.68e15369.js",
+    "static/js/2.72c28189.chunk.js",
+    "static/css/main.e492ffe7.chunk.css",
+    "static/js/main.7ac6da23.chunk.js"
+  ]
+}
