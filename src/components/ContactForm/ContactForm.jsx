@@ -1,24 +1,23 @@
-import React, { useState } from "react";
-import {connect} from 'react-redux'
-import { v4 as uuidv4 } from "uuid";
-import { FaUserAlt, FaPhoneAlt } from "react-icons/fa";
-import contactsActions from '../../redux/contacts/contacts-actions'
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { FaUserAlt, FaPhoneAlt } from 'react-icons/fa';
+import * as contactsActions from '../../redux/contacts/contacts-actions';
 
-import { CustomForm, Label, Input, Button } from "./ContactForm.styled";
+import { CustomForm, Label, Input, Button } from './ContactForm.styled';
 
 function ContactForm({ onSubmit }) {
-  const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
   const onInputChange = (e) => {
     const { value, name } = e.target;
 
     switch (name) {
-      case "name":
+      case 'name':
         setName(value);
         break;
 
-      case "number":
+      case 'number':
         setNumber(value);
         break;
 
@@ -30,40 +29,40 @@ function ContactForm({ onSubmit }) {
   const onFormSubmit = (e) => {
     e.preventDefault();
     onSubmit({ name, number });
-    setName("");
-    setNumber("");
+    setName('');
+    setNumber('');
   };
 
   return (
     <div>
-      <CustomForm onSubmit={onFormSubmit} autoComplete="off">
+      <CustomForm onSubmit={onFormSubmit} autoComplete='off'>
         <Label>
-          <FaUserAlt size="16" />
+          <FaUserAlt size='16' />
           Name
           <Input
-            type="text"
-            name="name"
+            type='text'
+            name='name'
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
             required
             onChange={onInputChange}
-            value={name} 
-            placeholder="Rosie Simpson"
+            value={name}
+            placeholder='Rosie Simpson'
             autoFocus
           />
         </Label>
         <Label>
-          <FaPhoneAlt size="16" />
+          <FaPhoneAlt size='16' />
           Phone
           <Input
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+            type='tel'
+            name='number'
+            pattern='\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}'
+            title='Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +'
             required
             onChange={onInputChange}
             value={number}
-            placeholder="38(***) *** ****"
+            placeholder='38(***) *** ****'
           />
         </Label>
         <Button>Add Contact</Button>
@@ -72,8 +71,9 @@ function ContactForm({ onSubmit }) {
   );
 }
 
-const mapDispatchToProps = dispatch =>({
-  onSubmit: ({name, number})=>dispatch(contactsActions.addContact(name, number) ),
-})
+const mapDispatchToProps = (dispatch) => ({
+  onSubmit: ({ name, number }) =>
+    dispatch(contactsActions.addContact(name, number)),
+});
 
 export default connect(null, mapDispatchToProps)(ContactForm);

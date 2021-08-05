@@ -1,79 +1,32 @@
-import React, { useState, useEffect, useMemo } from "react";
-import toast, { Toaster } from "react-hot-toast";
-import { HiUsers } from "react-icons/hi";
-import { FaAddressBook } from "react-icons/fa";
+import { Toaster } from 'react-hot-toast';
+import { HiUsers } from 'react-icons/hi';
+import { FaAddressBook } from 'react-icons/fa';
 
-import Container from "./components/Container/Container";
-import Section from "./components/Section/Section";
-import ContactForm from "./components/ContactForm/ContactForm";
-import ContactList from "./components/ContactList/ContactList";
-import Filter from "./components/Filter/Filter";
+import Container from './components/Container/Container';
+import Section from './components/Section/Section';
+import ContactForm from './components/ContactForm/ContactForm';
+import ContactList from './components/ContactList/ContactList';
+import Filter from './components/Filter/Filter';
+import store from './redux/store';
 
 function App() {
-  const [contacts, setContacts] = useState(
-    () => JSON.parse(window.localStorage.getItem("contacts")) ?? ""
-  );
-  const [filter, setFilter] = useState("");
-
-  useEffect(() => {
-    window.localStorage.setItem("contacts", JSON.stringify(contacts));
-  }, [contacts]);
-
-  // const addContact = (newContact) => {
-
-  //   const findName = contacts
-  //     ? contacts.find((contact) => contact.name === newContact.name)
-  //     : "";
-
-  //   if (!findName) {
-  //     setContacts((prev) => [newContact, ...prev]);
-
-  //     toast.success(`Contact ${newContact.name} added to Phonebook`, {
-  //       duration: 4000,
-  //       position: "top-right",
-  //     });
-  //   } else {
-  //     toast.error(`${newContact.name} is already in contacts.`, {
-  //       duration: 4000,
-  //       position: "top-right",
-  //     });
-  //   }
-  // };
-
-  // const changeFilter = (e) => {
-  //   setFilter(e.currentTarget.value);
-  // };
-
-  const visibleContacts = useMemo(() => {
-    return contacts
-      ? contacts.filter((contact) =>
-          contact.name.toLowerCase().includes(filter.toLowerCase())
-        )
-      : [];
-  }, [contacts, filter]);
-
-  // function deleteContact(contactId) {
-  //   setContacts(
-  //     contacts.filter((contact) => {
-  //       return contact.id !== contactId;
-  //     })
-  //   );
-  // }
-
+  const setedContacts = store.getState().contacts.items;
   return (
     <Container>
       <Toaster />
-      <Section title={"Phonebook"}>
-        <FaAddressBook size="24" />
-        <ContactForm /*onSubmit={addContact}*/></ContactForm>
+      <Section title={'Phonebook'}>
+        <FaAddressBook size='24' />
+
+        {<ContactForm /*onSubmit={addContact}*/ />}
       </Section>
 
-      <Section title={"Contacts"}>
-        <HiUsers size="26" />
+      <Section title={'Contacts'}>
+        <HiUsers size='26' />
         <Filter /*onChange={changeFilter} value={filter}*/ />
-        {contacts && (
+
+        {setedContacts.length !== 0 && (
           <ContactList
-            /*contacts={visibleContacts}
+          /*contacts={visibleContacts}
             onDeleteContact={deleteContact}*/
           />
         )}
