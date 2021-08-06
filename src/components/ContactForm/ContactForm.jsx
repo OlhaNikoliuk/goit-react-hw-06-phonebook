@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FaUserAlt, FaPhoneAlt } from 'react-icons/fa';
 import * as contactsActions from '../../redux/contacts/contacts-actions';
-
 import { CustomForm, Label, Input, Button } from './ContactForm.styled';
 
 function ContactForm({ onSubmit }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
 
   const onInputChange = (e) => {
     const { value, name } = e.target;
@@ -28,7 +28,8 @@ function ContactForm({ onSubmit }) {
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ name, number });
+    dispatch(contactsActions.addContact(name, number));
+    // onSubmit({ name, number });
     setName('');
     setNumber('');
   };
@@ -71,9 +72,10 @@ function ContactForm({ onSubmit }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: ({ name, number }) =>
-    dispatch(contactsActions.addContact(name, number)),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   onSubmit: ({ name, number }) =>
+//     dispatch(contactsActions.addContact(name, number)),
+// });
+// export default connect(null, mapDispatchToProps)(ContactForm);
 
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default ContactForm;

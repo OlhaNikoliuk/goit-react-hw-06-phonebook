@@ -7,10 +7,10 @@ import Section from './components/Section/Section';
 import ContactForm from './components/ContactForm/ContactForm';
 import ContactList from './components/ContactList/ContactList';
 import Filter from './components/Filter/Filter';
-import store from './redux/store';
+// import store from './redux/store';
 
 function App() {
-  const setedContacts = store.getState().contacts.items;
+  // const setedContacts = store.getState().contacts.items;
   
   return (
     <Container>
@@ -25,12 +25,12 @@ function App() {
         <HiUsers size='26' />
         <Filter /*onChange={changeFilter} value={filter}*/ />
 
-        {setedContacts.length !== 0 && (
+        {/* {setedContacts.length !== 0 && ( */}
           <ContactList
           /*contacts={visibleContacts}
             onDeleteContact={deleteContact}*/
           />
-        )}
+        {/* )} */}
       </Section>
     </Container>
   );

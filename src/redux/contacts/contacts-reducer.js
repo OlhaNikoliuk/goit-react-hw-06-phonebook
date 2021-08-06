@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import types from './contacts-types';
-import toast from 'react-hot-toast';
+import { createReducer } from '@reduxjs/toolkit';
 
-const initialState = JSON.parse(window.localStorage.getItem('contacts')) ?? [];
+import toast from 'react-hot-toast';
+import * as actions from './contacts-actions'
+// const initialState = JSON.parse(window.localStorage.getItem('contacts')) ?? [];
 
 const findContact = (allContacts, newContact) => {
 
@@ -25,36 +26,49 @@ const findContact = (allContacts, newContact) => {
   }
 };
 
+const items = createReducer([], {
+  [actions.addContact]: (state, action)=>[action.payload, ...state],
+  [actions.deleteContact]: (state, action)=>state.filter((contact) => {
+    return contact.id !== action.payload;
+})})
 
-const items = (state = initialState, { type, payload }) => {
-  switch (type) {
-    case types.ADD:
-      const findName = findContact(state, payload.name);
+const filter = createReducer('', {
+  [actions.changeFilter]: (_, {payload})=>{return payload}
+}) 
 
-      if (findName) return state;
-      localStorage.setItem('contacts', JSON.stringify([payload, ...state]));
-      return [payload, ...state];
 
-    case types.DELETE:
-      const contacts = state.filter((contact) => {
-        return contact.id !== payload;
-      });
-      localStorage.setItem('contacts', JSON.stringify(contacts));
-      return contacts;
+// ===== VANILLA REDUX ===//
+// import types from './contacts-types';
+// const items = (state = initialState, { type, payload }) => {
+//   switch (type) {
+//     case types.ADD:
+//       const findName = findContact(state, payload.name);
 
-    default:
-      return state;
-  }
-};
-const filter = (state = '', { type, payload }) => {
-  switch (type) {
-    case types.CANGE_FILTER:
-      return payload;
+//       if (findName) return state;
+//       localStorage.setItem('contacts', JSON.stringify([payload, ...state]));
+//       return [payload, ...state];
 
-    default:
-      return state;
-  }
-};
+//     case types.DELETE:
+//       const contacts = state.filter((contact) => {
+//         return contact.id !== payload;
+//       });
+//       localStorage.setItem('contacts', JSON.stringify(contacts));
+//       return contacts;
+
+//     default:
+//       return state;
+//   }
+// };
+
+// const filter = (state = '', { type, payload }) => {
+//   switch (type) {
+//     case types.CANGE_FILTER:
+//       return payload;
+
+//     default:
+//       return state;
+//   }
+// };
 
 export default combineReducers({
   items,
