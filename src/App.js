@@ -1,7 +1,7 @@
 import { Toaster } from 'react-hot-toast';
 import { HiUsers } from 'react-icons/hi';
 import { FaAddressBook } from 'react-icons/fa';
-
+import { useSelector } from 'react-redux';
 import Container from './components/Container/Container';
 import Section from './components/Section/Section';
 import ContactForm from './components/ContactForm/ContactForm';
@@ -10,8 +10,8 @@ import Filter from './components/Filter/Filter';
 // import store from './redux/store';
 
 function App() {
-  // const setedContacts = store.getState().contacts.items;
-  
+  const setedContacts = useSelector((state) => state.contacts.items);
+
   return (
     <Container>
       <Toaster />
@@ -25,12 +25,12 @@ function App() {
         <HiUsers size='26' />
         <Filter /*onChange={changeFilter} value={filter}*/ />
 
-        {/* {setedContacts.length !== 0 && ( */}
+        {setedContacts.length > 0 && (
           <ContactList
           /*contacts={visibleContacts}
             onDeleteContact={deleteContact}*/
           />
-        {/* )} */}
+        )}
       </Section>
     </Container>
   );

@@ -2,11 +2,10 @@ import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 
 import toast from 'react-hot-toast';
-import * as actions from './contacts-actions'
+import * as actions from './contacts-actions';
 // const initialState = JSON.parse(window.localStorage.getItem('contacts')) ?? [];
 
 const findContact = (allContacts, newContact) => {
-
   const includedContact = allContacts
     ? allContacts.find((contact) => contact.name === newContact)
     : '';
@@ -26,16 +25,34 @@ const findContact = (allContacts, newContact) => {
   }
 };
 
-const items = createReducer([], {
-  [actions.addContact]: (state, action)=>[action.payload, ...state],
-  [actions.deleteContact]: (state, action)=>state.filter((contact) => {
+const addContact = (state, action) => {
+  const setedContact = findContact(state, action.payload.name);
+  if (setedContact) return state;
+  return [action.payload, ...state];
+};
+
+const deleteContact = (state, action) => {
+  const contacts = state.filter((contact) => {
     return contact.id !== action.payload;
-})})
+  });
+  return contacts;
+};
+
+const items = createReducer([], {
+  [actions.addContact]: addContact,
+  [actions.deleteContact]: deleteContact,
+});
 
 const filter = createReducer('', {
-  [actions.changeFilter]: (_, {payload})=>{return payload}
-}) 
+  [actions.changeFilter]: (_, { payload }) => {
+    return payload;
+  },
+});
 
+export default combineReducers({
+  items,
+  filter,
+});
 
 // ===== VANILLA REDUX ===//
 // import types from './contacts-types';
@@ -69,8 +86,3 @@ const filter = createReducer('', {
 //       return state;
 //   }
 // };
-
-export default combineReducers({
-  items,
-  filter,
-});
